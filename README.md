@@ -29,7 +29,8 @@ Documentation will follow later (be patient).
 ```
 
 #### Next update
-Documentation for parameters and constraints (in particular for the horizontal scroll direction)
+- Documentation for parameters and constraints (in particular for the horizontal scroll direction)
+- plug imagesLoaded (wait images loaded before scroll)
 
 ## You can also grab GoTo using bower:
 ```

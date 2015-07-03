@@ -215,7 +215,11 @@
           s.$scrollContainer.css({display: ''});
 
           s.sAnchorLink = GoTo.get(window.location.hash);
-          GoTo.set(s.sAnchorLink);
+
+          // TODO: replace setTimeout by imagesLoaded
+          setTimeout(function() {
+            GoTo.set(s.sAnchorLink);
+          }, 1500);
         }, 1);
       }
 
@@ -428,8 +432,8 @@
         if (s.debug) console.log('_iTargetOffset: ' + _iTargetOffset);
       }
 
-      if (s.sDirection == 'vertical') _oScrollAnimation = {scrollTop: _iTargetOffset - _iOffset + s.gap};
-      else if (s.sDirection == 'horizontal') _oScrollAnimation = {scrollLeft: _iTargetOffset - _iOffset + s.gap};
+      if (s.sDirection == 'vertical') _oScrollAnimation = {scrollTop: _iTargetOffset - _iOffset - s.gap};
+      else if (s.sDirection == 'horizontal') _oScrollAnimation = {scrollLeft: _iTargetOffset - _iOffset - s.gap};
 
       s.iScrollSpeed = Math.abs(s.iCurrentScrollPosition - _iTargetOffset);
       if (s.iScrollSpeed > 1000) {
@@ -444,7 +448,7 @@
         if (!s.bScrolled) { // to correct the double callback of the GoToHash function (scroll on html AND body)
           s.bScrolled = true;
           GoTo.process();
-          GoTo.onScrollEnd(undefined, _iTargetOffset - _iOffset + s.gap);
+          GoTo.onScrollEnd(undefined, _iTargetOffset - _iOffset - s.gap);
           if ($.isFunction(fCallback)) {
             GoTo.after(fCallback);
           }
